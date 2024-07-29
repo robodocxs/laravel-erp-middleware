@@ -12,7 +12,7 @@ class AccountDTO extends Data
 {
     public function __construct(
         #[Nullable, StringType]
-        public ?string $erp_id,
+        public ?string $id,
 
         #[Nullable, StringType]
         public ?string $vat_id,
@@ -32,7 +32,7 @@ class AccountDTO extends Data
     public static function fromArray(array $data): self
     {
         return new self(
-            erp_id: $data['id'] ?? null,
+            id: $data['id'] ?? null,
             vat_id: $data['vat_id'] ?? null,
             name: $data['name'] ?? null,
             address: isset($data['address']) ? AddressDTO::from($data['address']) : null,

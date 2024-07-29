@@ -20,7 +20,7 @@ class PAResponseDTO extends Data
         #[Required, IntegerType]
         public int $quantity,
 
-        #[Required, Numeric]
-        public float $unit_price
+        #[Numeric]
+        public ?float $unit_price
     ) {}
 }

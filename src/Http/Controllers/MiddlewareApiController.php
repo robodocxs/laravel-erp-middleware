@@ -42,7 +42,7 @@ class MiddlewareApiController extends Controller
             return $collection->filter(fn($product) => str_contains(strtolower($product->name), strtolower($search)) ||
                 str_contains(strtolower($product->product_code), strtolower($search))
             );
-        });
+        })->values();
 
         return response()->json($products);
     }
@@ -72,7 +72,7 @@ class MiddlewareApiController extends Controller
         })->when($request->input('vat_id'), function ($collection, $vatId) {
             return $collection->filter(fn($account) => str_contains(strtolower($account->vat_id), strtolower($vatId))
             );
-        });
+        })->values();
 
         return response()->json($accounts);
     }
@@ -94,7 +94,7 @@ class MiddlewareApiController extends Controller
                 'email' => 'jane.smith@fakecompany.com',
                 'phone' => '0987654321'
             ])
-        ]);
+        ])->values();
 
         return response()->json($contacts);
     }
@@ -122,7 +122,7 @@ class MiddlewareApiController extends Controller
                 'country_code' => 'FC',
                 'type' => 'delivery'
             ])
-        ]);
+        ])->values();
 
         return response()->json($addresses);
     }
@@ -138,7 +138,7 @@ class MiddlewareApiController extends Controller
                 'product_code' => 'DEF456',
                 'custom_product_code' => 'CUST-002'
             ])
-        ]);
+        ])->values();
 
         return response()->json($customProducts);
     }
@@ -158,15 +158,13 @@ class MiddlewareApiController extends Controller
                 quantity: $paRequest->quantity,
                 unit_price: $unitPrice
             );
-        });
+        })->values();
 
         return response()->json($paResponses);
     }
 
     public function ping()
     {
-        Storage::disk('fileshare')->get('aaa');
-
         return response()->json(['msg' => 'Pong.']);
     }
 }
