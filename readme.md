@@ -4,7 +4,13 @@ This package provides a middleware for ERP integration in Laravel applications, 
 
 ## Installation
 
-You can install the package via composer:
+Only if you want to start from a new laravel project:
+
+```bash
+php artisan laravel new robodocxs-middleware-something
+```
+
+Install the package via composer:
 
 ```bash
 composer require robodocxs/laravel-erp-middleware
@@ -14,9 +20,16 @@ After installation, you should publish the configuration file:
 
 ```bash
 php artisan vendor:publish --provider="Robodocxs\LaravelErpMiddleware\LaravelErpMiddlewareServiceProvider" --tag="config"
+php artisan 
 ```
 
 This will publish the `robodocxs-erp-middleware.php` configuration file to your config directory.
+
+To publish the built-in Controller as a starting point, use this command:
+
+```bash
+laravel-erp-middleware:publish-api-controller
+```
 
 ## Configuration
 
