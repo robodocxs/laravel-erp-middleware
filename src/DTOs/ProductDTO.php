@@ -32,7 +32,13 @@ class ProductDTO extends Data
         public ?int $base_unit_id,
 
         #[Nullable, StringType]
-        public ?string $ean
+        public ?string $ean,
+
+        #[Nullable]
+        public ?float $unit_price,
+
+        #[Nullable]
+        public ?float $weight,
     ) {}
 
     public static function fromArray(array $data): self
@@ -44,7 +50,9 @@ class ProductDTO extends Data
             name: $data['name'] ?? null,
             description: $data['description'] ?? null,
             base_unit_id: $data['base_unit_id'] ?? null,
-            ean: $data['ean'] ?? null
+            ean: $data['ean'] ?? null,
+            unit_price: $data['unit_price'] ?? null,
+            weight: $data['weight'] ?? null,
         );
 
         if (isset($data['unit_conversions']) && is_array($data['unit_conversions'])) {

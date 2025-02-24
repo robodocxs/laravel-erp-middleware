@@ -20,10 +20,43 @@ After installation, you should publish the configuration file:
 
 ```bash
 php artisan vendor:publish --provider="Robodocxs\LaravelErpMiddleware\LaravelErpMiddlewareServiceProvider" --tag="config"
-php artisan 
 ```
 
 This will publish the `robodocxs-erp-middleware.php` configuration file to your config directory.
+
+Then, install the api:
+
+```bash
+php artisan api:install
+```
+
+Use this example routes file:
+
+```
+Route::middleware('auth.basic.once')->group(function () {
+
+    Route::get('/products', [LaravelErpMiddlewareController::class, 'listProducts'])
+        ->name('products.index');
+
+    Route::get('/accounts', [LaravelErpMiddlewareController::class, 'listAccounts'])
+        ->name('accounts.index');
+
+    Route::get('/accounts/{account_id}/contacts', [LaravelErpMiddlewareController::class, 'listAccountContacts'])
+        ->name('accounts.contacts');
+
+    Route::get('/accounts/{account_id}/addresses', [LaravelErpMiddlewareController::class, 'listAccountAddresses'])
+        ->name('accounts.addresses');
+
+    Route::get('/accounts/{account_id}/products', [LaravelErpMiddlewareController::class, 'listAccountCustomProducts'])
+        ->name('accounts.products');
+
+    Route::post('/products/price-and-availability', [LaravelErpMiddlewareController::class, 'checkPriceAndAvailability'])
+        ->name('products.price-availability');
+
+    Route::get('/ping', [LaravelErpMiddlewareController::class, 'ping'])
+        ->name('ping');
+});
+```
 
 To publish the built-in Controller as a starting point, use this command:
 
