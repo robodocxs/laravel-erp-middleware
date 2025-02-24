@@ -28,8 +28,8 @@ class ProductDTO extends Data
         #[Nullable, StringType]
         public ?string $description,
 
-        #[Nullable, IntegerType]
-        public ?int $base_unit_id,
+        #[Nullable, StringType]
+        public string|int|null $base_unit_id,
 
         #[Nullable, StringType]
         public ?string $ean,
