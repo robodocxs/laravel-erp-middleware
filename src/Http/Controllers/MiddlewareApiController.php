@@ -51,18 +51,30 @@ class MiddlewareApiController extends Controller
     {
         $accounts = Collection::make([
             AccountDTO::from([
-                'erp_id' => 'ERP001',
+                'id' => 'ERP001',
                 'vat_id' => 'VAT001',
                 'name' => 'Fake Company 1',
-                'address' => ['street' => 'Main St', 'house_number' => '1', 'zip' => '12345', 'city' => 'Faketown'],
+                'address' => [
+                    'street' => 'Main St',
+                    'house_number' => '1',
+                    'zip' => '12345',
+                    'city' => 'Faketown',
+                    'country_code' => 'DE',
+                ],
                 'delivery_addresses' => [],
                 'invoice_addresses' => []
             ]),
             AccountDTO::from([
-                'erp_id' => 'ERP002',
+                'id' => 'ERP002',
                 'vat_id' => 'VAT002',
                 'name' => 'Fake Company 2',
-                'address' => ['street' => 'Second St', 'house_number' => '2', 'zip' => '67890', 'city' => 'Mockville'],
+                'address' => [
+                    'street' => 'Main St',
+                    'house_number' => '1',
+                    'zip' => '12345',
+                    'city' => 'Faketown',
+                    'country_code' => 'DE',
+                ],
                 'delivery_addresses' => [],
                 'invoice_addresses' => []
             ])

@@ -16,6 +16,9 @@ class AddressDTO extends Data
         public ?string $name,
 
         #[Nullable, StringType]
+        public ?string $description,
+
+        #[Nullable, StringType]
         public ?string $street,
 
         #[Nullable, StringType]
@@ -39,6 +42,7 @@ class AddressDTO extends Data
         return new self(
             id: $data['id'] ?? null,
             name: $data['name'] ?? null,
+            description: $data['description'] ?? null,
             street: $data['street'] ?? null,
             house_number: $data['house_number'] ?? null,
             zip: $data['zip'] ?? null,
