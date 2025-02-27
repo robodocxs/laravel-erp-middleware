@@ -9,7 +9,7 @@ use Spatie\LaravelData\Attributes\Validation\IntegerType;
 
 class ProductDTO extends Data
 {
-    /** @var array<int, array{unit_id: ?int, value: ?float}> */
+    /** @var array<int, array{unit_id: int|string|null, value: float|null}> */
     public array $unit_conversions = [];
 
     public function __construct(
@@ -67,7 +67,7 @@ class ProductDTO extends Data
         return $product;
     }
 
-    public function addUnitConversion(?int $unitId, ?float $value): self
+    public function addUnitConversion(int|string|null $unitId, float|null $value): self
     {
         $this->unit_conversions[] = [
             'unit_id' => $unitId,
