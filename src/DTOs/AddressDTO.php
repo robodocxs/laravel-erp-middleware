@@ -6,36 +6,24 @@ use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Attributes\Validation\Nullable;
 use Spatie\LaravelData\Attributes\Validation\StringType;
 
+/**
+ * @deprecated Use robodocxs/robodocxs-middleware-dtos instead
+ */
 class AddressDTO extends Data
 {
     public function __construct(
-        #[Nullable, StringType]
-        public ?string $id,
-
-        #[Nullable, StringType]
-        public ?string $name,
-
-        #[Nullable, StringType]
-        public ?string $description,
-
-        #[Nullable, StringType]
-        public ?string $street,
-
-        #[Nullable, StringType]
-        public ?string $house_number,
-
-        #[Nullable, StringType]
-        public ?string $zip,
-
-        #[Nullable, StringType]
-        public ?string $city,
-
-        #[Nullable, StringType]
-        public ?string $country_code,
-
-        #[Nullable, StringType]
-        public ?string $type
-    ) {}
+        public string|null $id = null,
+        public string|null $name = null,
+        public string|null $description = null,
+        public string|null $street = null,
+        public string|null $house_number = null,
+        public string|null $zip = null,
+        public string|null $city = null,
+        public string|null $country_code = null,
+        public string|null $type = null,
+    )
+    {
+    }
 
     public static function fromArray(array $data): self
     {

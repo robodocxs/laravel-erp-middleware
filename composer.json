@@ -1,45 +1,48 @@
 {
-    "name": "robodocxs/laravel-erp-middleware",
-    "description": "A middleware package to provide ERP functionality to Robodocxs",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Robodocxs",
-            "email": "integrations@robodocxs.ai"
-        }
-    ],
-    "require": {
-        "php": "^8.1",
-        "laravel/framework": "^10.0|^11.0",
-        "league/csv": "^9.0",
-        "league/flysystem-sftp-v3": "^3.28",
-        "spatie/laravel-data": "^3.0"
-    },
-    "require-dev": {
-        "orchestra/testbench": "^8.0",
-        "phpunit/phpunit": "^10.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Robodocxs\\LaravelErpMiddleware\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Robodocxs\\LaravelErpMiddleware\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Robodocxs\\LaravelErpMiddleware\\LaravelErpMiddlewareServiceProvider"
-            ]
-        }
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+  "name": "robodocxs/laravel-erp-middleware",
+  "description": "A middleware package to provide ERP functionality to Robodocxs",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Robodocxs",
+      "email": "integrations@robodocxs.ai"
+    }
+  ],
+  "require": {
+    "php": "^8.1",
+    "laravel/framework": "^10.0|^11.0",
+    "league/csv": "^9.0",
+    "league/flysystem-sftp-v3": "^3.28",
+    "robodocxs/robodocxs-middleware-dtos": "^1.0",
+    "spatie/laravel-data": "^3.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^8.0",
+    "phpunit/phpunit": "^10.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Robodocxs\\LaravelErpMiddleware\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Robodocxs\\LaravelErpMiddleware\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Robodocxs\\LaravelErpMiddleware\\LaravelErpMiddlewareServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "repositories": [
+  ]
 }

@@ -7,16 +7,16 @@ use Spatie\LaravelData\Attributes\Validation\Required;
 use Spatie\LaravelData\Attributes\Validation\StringType;
 use Spatie\LaravelData\Attributes\Validation\IntegerType;
 
+/**
+ * @deprecated Use robodocxs/robodocxs-middleware-dtos instead
+ */
 class PARequestDTO extends Data
 {
     public function __construct(
-        #[Required, StringType]
-        public string $id,
-
-        #[Required, StringType]
-        public string $product_code,
-
-        #[Required, IntegerType]
-        public int $quantity
-    ) {}
+        public string|null $id = null,
+        public string|null $product_code = null,
+        public int|null    $quantity = null,
+    )
+    {
+    }
 }

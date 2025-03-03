@@ -10,6 +10,9 @@ Route::middleware('auth.basic.once')->prefix('api')->group(function () {
     Route::get('/accounts', [MiddlewareApiController::class, 'listAccounts'])
         ->name('accounts.index');
 
+    Route::get('/accounts/{account_id}/erp-documents', [MiddlewareApiController::class, 'listErpDocuments'])
+        ->name('accounts.erp-documents');
+
     Route::get('/accounts/{account_id}/contacts', [MiddlewareApiController::class, 'listAccountContacts'])
         ->name('accounts.contacts');
 

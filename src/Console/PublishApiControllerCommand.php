@@ -22,7 +22,7 @@ class PublishApiControllerCommand extends Command
 
     public function handle()
     {
-        $sourcePath = __DIR__.'/../Http/Controllers/MiddlewareApiController.php';
+        $sourcePath = __DIR__ . '/../Http/Controllers/MiddlewareApiController.php';
         $destinationPath = app_path('Http/Controllers/LaravelErpMiddlewareController.php');
 
         if ($this->files->exists($destinationPath)) {

@@ -1,4 +1,4 @@
-# Laravel ERP Middleware
+# Laravel ERP Middleware for Robodocxs
 
 This package provides a middleware for ERP integration in Laravel applications, including basic DTOs, custom middleware for one-time basic authentication, custom exception handling, and additional capabilities for SFTP file system operations and CSV handling.
 
@@ -32,7 +32,7 @@ php artisan api:install
 
 Use this example routes file:
 
-```
+```php
 Route::middleware('auth.basic.once')->group(function () {
 
     Route::get('/products', [LaravelErpMiddlewareController::class, 'listProducts'])
@@ -137,7 +137,11 @@ The following routes are available:
 - **Endpoint:** `GET /api/accounts/{account_id}/products`
 - **Response:** Collection of CustomOrderCodeDTOs
 
-### 6. Check Price and Availability
+### 6. List ERP Documents
+- **Endpoint:** `POST /api/accounts/{account_id}/erp-documents`
+- **Response:** Array of ErpDocumentDTO objects
+
+### 7. Check Price and Availability
 - **Endpoint:** `POST /api/products/price-and-availability`
 - **Request Body:** Array of PARequestDTO objects
 - **Response:** Array of PAResponseDTO objects
@@ -148,47 +152,7 @@ All these routes require authentication. The `AuthenticateOnceWithBasicAuth` mid
 
 ### DTOs
 
-This package provides several Data Transfer Objects (DTOs) for handling various data structures:
-
-#### ProductDTO
-
-```php
-use Robodocxs\LaravelErpMiddleware\DTOs\ProductDTO;
-
-$productData = [
-    'id' => '1',
-    'product_code' => 'ABC123',
-    'product_code_2' => 'XYZ-001',
-    'name' => 'Sample Product',
-    'description' => 'This is a sample product',
-    'base_unit_id' => 1,
-    'ean' => '1234567890123'
-];
-
-$productDTO = ProductDTO::from($productData);
-```
-
-#### AccountDTO
-
-```php
-use Robodocxs\LaravelErpMiddleware\DTOs\AccountDTO;
-
-$accountData = [
-    'id' => '1',
-    'erp_id' => 'ERP001',
-    'vat_id' => 'VAT001',
-    'name' => 'Sample Company',
-    'address' => [
-        'street' => 'Main St',
-        'zip' => '12345',
-        'city' => 'Sampleville'
-    ],
-    'delivery_addresses' => [],
-    'invoice_addresses' => []
-];
-
-$accountDTO = AccountDTO::from($accountData);
-```
+This package requires DTOs from robodocxs/robodocxs-middleware-dtos. They serve as the glue between the backend and the middlewares.
 
 ### Custom Middleware
 
@@ -233,6 +197,21 @@ For more detailed usage instructions for SFTP and CSV operations, please refer t
 - [league/flysystem-sftp-v3 documentation](https://flysystem.thephpleague.com/docs/adapter/sftp-v3/)
 - [league/csv documentation](https://csv.thephpleague.com/)
 
+## Deploying
+
+When deploying to dev or prod servers, use these defaults for .env:
+
+```dotenv
+SESSION_DRIVER=redis
+
+QUEUE_CONNECTION=redis
+
+CACHE_STORE=redis
+CACHE_PREFIX="${APP_NAME}"
+
+REDIS_DB=<see robodocxs/docs/middleware-server.md for allocation>
+```
+
 ## Testing
 
 To run the package tests, use:
@@ -240,6 +219,33 @@ To run the package tests, use:
 ```bash
 composer test
 ```
+
+## Development
+
+To symlink this project in your local middleware for faster development, follow these steps:
+
+1. Add repository to `composer.json`
+
+```
+"repositories": [
+    {
+        "type": "path",
+        "url": "../laravel-erp-middleware",
+        "options": {
+            "symlink": true
+        }
+    }
+]
+```
+
+2. Require `dev-main` and prefer source:
+
+```
+composer require robodocxs/laravel-erp-middleware:dev-main --prefer-source
+```
+
+If you want to also symlink robodocxs/robodocxs-middleware-dtos in your project, you have to do it directly in that project.
+It is not possible to symlink it here and expect your project to pick it up from here.
 
 ## Contributing
 

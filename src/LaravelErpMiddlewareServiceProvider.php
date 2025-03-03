@@ -34,8 +34,6 @@ class LaravelErpMiddlewareServiceProvider extends ServiceProvider
             __DIR__.'/../config/robodocxs-erp-middleware.php' => config_path('robodocxs-erp-middleware.php'),
         ], 'config');
 
-        //$this->loadRoutesFrom(__DIR__.'/routes/api.php');
-
         if ($this->app->runningInConsole()) {
             $this->commands([
                 PublishApiControllerCommand::class,

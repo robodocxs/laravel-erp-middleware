@@ -8,40 +8,27 @@ use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Attributes\Validation\Nullable;
 use Spatie\LaravelData\Attributes\Validation\StringType;
 
+/**
+ * @deprecated Use robodocxs/robodocxs-middleware-dtos instead
+ */
 class AccountDTO extends Data
 {
     public function __construct(
-        #[Nullable, StringType]
-        public ?string         $id,
-
-        #[Nullable, StringType]
-        public ?string         $id_2,
-
-        #[Nullable, StringType]
-        public ?string         $vat_id,
-
-        #[Nullable, StringType]
-        public ?string         $ean,
-
-        #[Nullable, StringType]
-        public ?string         $name,
-
-        #[Nullable, StringType]
-        public ?string         $description,
-
-        #[Nullable, StringType]
-        public ?string         $contact,
-
-        #[Nullable, StringType]
-        public ?string         $email,
-
-        public ?AddressDTO     $address,
+        public string|null         $id = null,
+        public string|null         $id_2 = null,
+        public string|null         $vat_id = null,
+        public string|null         $ean = null,
+        public string|null         $name = null,
+        public string|null         $description = null,
+        public string|null         $contact = null,
+        public string|null         $email = null,
+        public AddressDTO|null     $address = null,
 
         #[DataCollectionOf(AddressDTO::class)]
-        public ?DataCollection $delivery_addresses,
+        public DataCollection|null $delivery_addresses = null,
 
         #[DataCollectionOf(AddressDTO::class)]
-        public ?DataCollection $invoice_addresses
+        public DataCollection|null $invoice_addresses = null
     )
     {
     }

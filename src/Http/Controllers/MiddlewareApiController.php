@@ -2,17 +2,22 @@
 
 namespace Robodocxs\LaravelErpMiddleware\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
-use Robodocxs\LaravelErpMiddleware\DTOs\ProductDTO;
-use Robodocxs\LaravelErpMiddleware\DTOs\AccountDTO;
-use Robodocxs\LaravelErpMiddleware\DTOs\ContactDTO;
-use Robodocxs\LaravelErpMiddleware\DTOs\AddressDTO;
-use Robodocxs\LaravelErpMiddleware\DTOs\CustomOrderCodeDTO;
-use Robodocxs\LaravelErpMiddleware\DTOs\PARequestDTO;
-use Robodocxs\LaravelErpMiddleware\DTOs\PAResponseDTO;
+use Robodocxs\RobodocxsMiddlewareDtos\DTOs\CustomDataDTO;
+use Robodocxs\RobodocxsMiddlewareDtos\DTOs\ErpDocumentDTO;
+use Robodocxs\RobodocxsMiddlewareDtos\DTOs\ErpDocumentItemDTO;
+use Robodocxs\RobodocxsMiddlewareDtos\DTOs\ProductDTO;
+use Robodocxs\RobodocxsMiddlewareDtos\DTOs\AccountDTO;
+use Robodocxs\RobodocxsMiddlewareDtos\DTOs\ContactDTO;
+use Robodocxs\RobodocxsMiddlewareDtos\DTOs\AddressDTO;
+use Robodocxs\RobodocxsMiddlewareDtos\DTOs\CustomOrderCodeDTO;
+use Robodocxs\RobodocxsMiddlewareDtos\DTOs\PARequestDTO;
+use Robodocxs\RobodocxsMiddlewareDtos\DTOs\PAResponseDTO;
+use Robodocxs\RobodocxsMiddlewareDtos\Enums\ErpDocumentType;
 
 class MiddlewareApiController extends Controller
 {
@@ -153,6 +158,43 @@ class MiddlewareApiController extends Controller
         ])->values();
 
         return response()->json($customProducts);
+    }
+
+    public function listErpDocuments($account_id, Request $request)
+    {
+        return ErpDocumentDTO::collection([
+            new ErpDocumentDTO(
+                id: 1,
+                erp_document_type: ErpDocumentType::ORDER,
+                blanket_order_erp_id: 'abc',
+                quote_erp_id: 'def',
+                total_value: 100.00,
+                created_at: now(),
+                valid_until: now(),
+                delivery_address: new AddressDTO(
+                    name: 'Ship to company',
+                    contact_name: 'Max Mustermann',
+                    phone: '+498955445544',
+                    description: 'Warenlager 1',
+                    street: 'Musterstrasse',
+                    house_number: '1b',
+                    zip: '80538',
+                    city: 'München'
+                ),
+                items: ErpDocumentItemDTO::collection([
+                    new ErpDocumentItemDTO(
+                        id: 12,
+                        line_item_number: '10',
+                        name: 'Product ABC',
+                        quantity: 10,
+                    )
+                ]),
+                customs: CustomDataDTO::collection([
+                    new CustomDataDTO(key: 'location_code', value: 'abc-123'),
+                    new CustomDataDTO(key: 'shipment_method_code', value: 'def-456'),
+                ]),
+            )
+        ]);
     }
 
     public function checkPriceAndAvailability(Request $request)
